@@ -11,7 +11,7 @@ shinyUI(fluidPage( #theme = shinytheme("cyborg"),
       
       tags$hr(),
       
-#      checkboxInput("header","Header",TRUE),
+      checkboxInput("header","Header",TRUE),
       radioButtons("sep","Separator",c(Comma=',',Semicolon=';',Tab='\t')),
 
       tags$hr(),
@@ -29,9 +29,7 @@ shinyUI(fluidPage( #theme = shinytheme("cyborg"),
       tabsetPanel(type = "tabs",
         tabPanel(p(textOutput("dim")),title="Data", tableOutput("data")),
         tabPanel("Structure", verbatimTextOutput("structure")),
-        tabPanel("Decision Tree", plotOutput("plotDTree")), 
-        tabPanel("Model Accuracy", verbatimTextOutput("modelAcc")), 
-        tabPanel("Documentation", htmlOutput("help"))
+        tabPanel("DecisionTree", plotOutput("plot"))
       )
     )
   )

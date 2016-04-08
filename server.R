@@ -70,7 +70,7 @@ shinyServer(function(input,output){
     
     # dimensions of the dataset
     output$dim<-renderText({
-    	paste("This dataset has:",dim(dataUpload())[1],"complete observations over ",dim(dataUpload())[2],"variables.")
+    	paste("This dataset has:",dim(dataUpload())[1]," complete observations over ",dim(dataUpload())[2]," variables.")
     	
     })
     # generate an HTML table view of the data
