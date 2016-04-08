@@ -44,7 +44,7 @@ shinyServer(function(input,output){
         fileData <- fileData[complete.cases(fileData),]
         
         # factor columns search: if count of levels <= 16 then it can be a factor. 
-        factorCols <- colnames(fileData[sapply(fileData, function(x) nlevels(as.factor(x)) < 16)])
+        factorCols <- colnames(fileData[sapply(fileData, function(x) nlevels(as.factor(x)) < 5)])
         factorColumns <<- c(factorColumns, factorCols)
         
         # convert those columns to factors
@@ -115,9 +115,51 @@ shinyServer(function(input,output){
     })
     
     output$help <- renderUI ({
-        HTML("<H2>Help</H2>
-             </br>1. How to use this app.
-             </br>2. Limitations")
+        HTML("<H2>Help</H2></br>
+            <ol>
+                <li>About this app: 
+                    </br>Created as submission for the Coursera Project Shiny Application. 
+                </li>
+                </br>
+                <li>Use:   
+                    </br>Upload a csv file, select a column from the drop down, and have a decision tree drawn for the selected column with the uploaded data as features.  
+                </li>
+                </br>
+                <li>Tabs: 
+                    <ul>
+                        <li>Documentation: this information. </li>
+                        <li>Data: html table displaying top x rows from the file. (X is selectable from the 'nr of observations') </li>
+                        <li>Structure: overview of the data types in the file. </li>
+                        <li>Decision tree: the plot of the learned decision tree from the data, for selected column </li>
+                        <li>Accuracy: shows the accuracy metrics for the learned tree model (needs improvements, and a nice plot) </li>
+                    </ul>
+                </li>
+                </br>
+                <li>Limitations & remarks:
+                    <ul>
+                        <li>Only files with header will work. </li>
+                        <li>File must be less than 1MB in size. </li>
+                        <li>Only complete rows are used, other with missing values are filtered out. 
+                        <li>Only columns with a maximum of 5 distinct values can be used in the selection drop down. </li>
+                        <li>Because of time limitation it is a simple app. </li>
+                        <li>Due to missing rattle package on shinyapps.io, the plot is not 'fancy'. </li>
+                    </ul>
+                </li>
+                </br>
+                <li>Future extensions & improvements: 
+                    <ul>
+                        <li>Create prediction input form, and predict outcome with the model build from the training set (import file). </li>
+                        <li>Add Accuracy measures for the model, with a nice plot to visualize. </li>
+                    </ul>
+                </li>
+                </br>
+                <li>Sources: 
+                    <ul>
+                        <li><a href='http://shiny.rstudio.com/gallery/upload-file.html'>rstudio shiny website</a>, providing excellent examples , and the idea of the file upload</li>
+                        <li><a href='http://www.stackoverflow.com'>stackoverflow</a>, and many other sources, providing help on specific issues encountered during development</li>
+                </li>
+            </ol>
+             ")
     })
 	
 })

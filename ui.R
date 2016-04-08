@@ -27,11 +27,12 @@ shinyUI(fluidPage( #theme = shinytheme("cyborg"),
     # Show a tabset that includes the table view and summary of data
     mainPanel(
       tabsetPanel(type = "tabs",
+        tabPanel("Documentation", htmlOutput("help")),
         tabPanel(p(textOutput("dim")),title="Data", tableOutput("data")),
         tabPanel("Structure", verbatimTextOutput("structure")),
         tabPanel("Decision Tree", plotOutput("plotDTree")), 
-        tabPanel("Model Accuracy", verbatimTextOutput("modelAcc")), 
-        tabPanel("Documentation", htmlOutput("help"))
+        tabPanel("Model Accuracy", verbatimTextOutput("modelAcc"))
+        
       )
     )
   )
