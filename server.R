@@ -6,8 +6,8 @@ library(dplyr)
 library(AppliedPredictiveModeling)
 library(gplots)
 # Not for shiny io server
-suppressMessages(library(rattle))
-library(RColorBrewer)
+#suppressMessages(library(rattle))
+#library(RColorBrewer)
 
 set.seed(174)
 
@@ -102,11 +102,11 @@ shinyServer(function(input,output){
 #         # fancy plot as part of the rattle package does deploy on shinyapps.io
 #         #fancyRpartPlot(fit$finalModel)
 #         trainedModel <<- fit$finalModel
-#         tree <- fit$finalModel
-#         prp(tree, extra = 1, box.col=c("orange", "lightseagreen")[tree$frame$yval])
+         tree <- fit$finalModel
+         prp(tree, extra = 1, box.col=c("orange", "lightseagreen")[tree$frame$yval])
         
-#        prp(currentModelTrained(), extra = 1, box.col=c("orange", "lightseagreen")[currentModelTrained()$frame$yval])
-        fancyRpartPlot(fit$finalModel)
+        prp(currentModelTrained(), extra = 1, box.col=c("orange", "lightseagreen")[currentModelTrained()$frame$yval])
+#        fancyRpartPlot(fit$finalModel)
 
     })
     
