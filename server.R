@@ -122,7 +122,8 @@ shinyServer(function(input,output){
                 </li>
                 </br>
                 <li>Use:   
-                    </br>Upload a csv file, select a column from the drop down, and have a decision tree drawn for the selected column with the uploaded data as features.  
+                    </br>Upload a csv file, select a column from the drop down, and have a decision tree drawn for the selected column with the uploaded data as features.
+                    </br>If you have no file, you can use this one: <a href='https://github.com/kenvanderheyden/DataExploreR/blob/master/testdata/titanic_training.csv'>titanic_training.csv</a>
                 </li>
                 </br>
                 <li>Tabs: 
@@ -156,6 +157,7 @@ shinyServer(function(input,output){
                 <li>Sources: 
                     <ul>
                         <li><a href='http://shiny.rstudio.com/gallery/upload-file.html'>rstudio shiny website</a>, providing excellent examples , and the idea of the file upload</li>
+                        <li><a href='https://www.kaggle.com/c/titanic/data'>kagle titanic competition</a>, for the available data set</li>
                         <li><a href='http://www.stackoverflow.com'>stackoverflow</a>, and many other sources, providing help on specific issues encountered during development</li>
                 </li>
             </ol>
