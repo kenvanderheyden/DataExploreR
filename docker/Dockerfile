@@ -35,16 +35,16 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9 \
 	&& apt-get install -y --no-install-recommends \
 		r-base=${R_BASE_VERSION}* \
 		r-base-dev=${R_BASE_VERSION}* \
-		r-recommended=${R_BASE_VERSION}*
+		r-recommended=${R_BASE_VERSION}* \
+	&& rm -rf /var/lib/apt/lists/*
    
 # Download and install shiny server : 
-## wget -O shiny-server.deb http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.3.0.403-amd64.deb \
 ## wget --no-verbose https://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.4.2.786-amd64.deb && \
-RUN wget -O shiny-server.deb http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.3.0.403-amd64.deb \
+RUN wget -O shiny-server.deb http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.3.0.403-amd64.deb && \
 	sudo gdebi shiny-server.deb && \
 	rm -f shiny-server.deb
     
-RUN R -e "install.packages(c('shiny', 'rmarkdown', 'caret', 'dplyr'), dependencies = TRUE, repos='https://cran.rstudio.com/')"
+RUN R -e "install.packages(c('shiny', 'rmarkdown', 'caret'), dependencies = TRUE, repos='https://cran.rstudio.com/')"
 
 RUN R -e "install.packages(c('rattle'), dependencies = TRUE, repos='http://rattle.togaware.com/')"
 

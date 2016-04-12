@@ -11,7 +11,7 @@ shinyUI(fluidPage( #theme = shinytheme("cyborg"),
       
       tags$hr(),
       
-#      checkboxInput("header","Header",TRUE),
+      checkboxInput("header","Header",TRUE),
       radioButtons("sep","Separator",c(Comma=',',Semicolon=';',Tab='\t')),
 
       tags$hr(),
@@ -27,11 +27,11 @@ shinyUI(fluidPage( #theme = shinytheme("cyborg"),
     # Show a tabset that includes the table view and summary of data
     mainPanel(
       tabsetPanel(type = "tabs",
-        tabPanel("Documentation", htmlOutput("help")),
         tabPanel(p(textOutput("dim")),title="Data", tableOutput("data")),
         tabPanel("Structure", verbatimTextOutput("structure")),
         tabPanel("Decision Tree", plotOutput("plotDTree")), 
-        tabPanel("Model Accuracy", verbatimTextOutput("modelAcc"))
+        tabPanel("Model Accuracy", verbatimTextOutput("modelAcc")),
+        tabPanel("Help", htmlOutput("help"))
         
       )
     )
