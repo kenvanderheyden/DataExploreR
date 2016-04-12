@@ -5,9 +5,10 @@ library(caret)
 library(dplyr)
 library(AppliedPredictiveModeling)
 library(gplots)
+library(e1071)
 # Not for shiny io server
-#suppressMessages(library(rattle))
-#library(RColorBrewer)
+suppressMessages(library(rattle))
+library(RColorBrewer)
 
 set.seed(174)
 
@@ -18,6 +19,14 @@ factorColumns <- c()
 
 dataTrain <- NULL
 dataTest <- NULL
+
+loadData <- function(dataIn, predColumn) {
+    df <- data.frame(dataIn())
+    selectedColumn <- predColumn
+    allOtherColumns <- colnames(df[, colnames(df) != selectedColumn])
+    allOtherColumns <- paste(allOtherColumns, sep = ",", collapse = "+")
+    formula <- as.formula(paste(selectedColumn, '~', allOtherColumns))
+}
 
 trainModel <- function(dataIn, predColumn) {
     df <- data.frame(dataIn())
@@ -59,6 +68,8 @@ shinyServer(function(input,output){
     })
 
     currentModelTrained <- reactive({
+    #    loadData(dataUpload, input$columnNames)
+    #    trainModel(dataUpload, input$columnNames)
         trainModel(dataUpload, input$columnNames)
     })
     
@@ -92,22 +103,7 @@ shinyServer(function(input,output){
     # generate the feature tree
     output$plotDTree <- renderPlot({
         
-#         df <- data.frame(dataUpload())
-#         selectedColumn <- input$columnNames
-#         allOtherColumns <- colnames(df[, colnames(df) != selectedColumn])
-#         allOtherColumns <- paste(allOtherColumns, sep = ",", collapse = "+")
-#         formula <- as.formula(paste(selectedColumn, '~', allOtherColumns))
-#         fit <- train(formula, method = "rpart", data = df)
-#             
-#         # fancy plot as part of the rattle package does deploy on shinyapps.io
-#         #fancyRpartPlot(fit$finalModel)
-#         trainedModel <<- fit$finalModel
-         tree <- fit$finalModel
-         prp(tree, extra = 1, box.col=c("orange", "lightseagreen")[tree$frame$yval])
-        
-        prp(currentModelTrained(), extra = 1, box.col=c("orange", "lightseagreen")[currentModelTrained()$frame$yval])
-#        fancyRpartPlot(fit$finalModel)
-
+        fancyRpartPlot(fit$finalModel)
     })
     
     output$modelAcc <- renderPrint ({
@@ -154,12 +150,7 @@ shinyServer(function(input,output){
                     </ul>
                 </li>
                 </br>
-                <li>Sources: 
-                    <ul>
-                        <li><a href='http://shiny.rstudio.com/gallery/upload-file.html'>rstudio shiny website</a>, providing excellent examples , and the idea of the file upload</li>
-                        <li><a href='https://www.kaggle.com/c/titanic/data'>kagle titanic competition</a>, for the available data set</li>
-                        <li><a href='http://www.stackoverflow.com'>stackoverflow</a>, and many other sources, providing help on specific issues encountered during development</li>
-                </li>
+
             </ol>
              ")
     })
