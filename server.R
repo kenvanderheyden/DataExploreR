@@ -12,10 +12,10 @@ suppressMessages(library(rattle))
 
 set.seed(174)
 
-# By default, the file size limit is 5MB. Here I've set the limit to 1MB.
-options(shiny.maxRequestSize = 1*1024^2)
+# By default, the file size limit is 5MB. Here I've set the limit to 10MB.
+options(shiny.maxRequestSize = 10*1024^2)
 
-# global vard (TODO: rework)
+# global variables (TODO: rework)
 factorColumns <- c()
 selectedColumn <- c()
 allOtherColumns <- c()

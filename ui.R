@@ -1,7 +1,8 @@
 library(shiny)
+library(shinythemes)
 
 # Define UI for random distribution application 
-shinyUI(fluidPage( #theme = shinytheme("cyborg"), 
+shinyUI(fluidPage( theme = shinytheme("cyborg"), 
 
  titlePanel("Data ExploreR")
   ,
